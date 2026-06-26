@@ -42,8 +42,8 @@ public sealed class Availability: BaseEntity
 
     public void Disable()
     {
-        if (Status != AvailabilityStatus.Reserved)
-            throw new InvalidOperationException("An active reserved schedule cannot be disabled.");
+        if (Status == AvailabilityStatus.Reserved)
+            throw new InvalidOperationException("A reserved schedule cannot be disabled.");
 
         Status= AvailabilityStatus.Disabled;    
     }
