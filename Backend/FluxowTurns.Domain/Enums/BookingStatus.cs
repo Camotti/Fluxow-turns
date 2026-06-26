@@ -1,4 +1,4 @@
-namespace FluxdoowTurns.Domain.Enums;
+namespace FluxowTurns.Domain.Enums;
 
 public enum BookingStatus
 {

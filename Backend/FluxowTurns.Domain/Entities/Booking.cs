@@ -1,7 +1,6 @@
 using FluxowTurns.Domain.Enums;
 using FluxowTurns.Domain.Common;
-using FluxdoowTurns.Domain.Enums;
-using System.Net;
+
 
 namespace FluxowTurns.Domain.Entities;
 
@@ -11,7 +10,7 @@ public sealed class Booking: BaseEntity
     public Guid AvailabilityId {get; private set;}
     public BookingStatus Status {get; private set;}
     public DateTime CreatedAt {get; private set;}
-    public DateTime CancelledAt {get; private set;}
+    public DateTime? CancelledAt {get; private set;}
 
     private Booking()
     {}
@@ -30,5 +29,16 @@ public sealed class Booking: BaseEntity
         CreatedAt=createdAt;
         Status=BookingStatus.Active;
 
+    }
+
+    public void Cancel(DateTime cancelledAt)
+    {
+        if (Status != BookingStatus.Active)
+            throw new InvalidOperationException(
+                "Only an active Booking can be cancelled"
+            );
+
+        Status= BookingStatus.Cancelled;
+        CancelledAt= cancelledAt;    
     }
 }
